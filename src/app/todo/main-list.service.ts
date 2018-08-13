@@ -17,4 +17,8 @@ export class MainListService {
     getItems() {
         return this.list;
     }
+
+    getItem(index: number) {
+        return this.list[index];
+    }
 }

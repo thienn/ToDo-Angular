@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MainListService } from './main-list.service';
-import { Item } from './item.model';
+import { MainListService } from '../main-list.service';
+import { Item } from '../item.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,12 +13,6 @@ export class MainListComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-  private list: Item[] = [
-    // Dummy data to test before connecting to Firebase
-    new Item('Item 1', 'Description 1', 'Image'),
-    new Item('Item 2', 'Description 2', 'Image'),
-]
-  
   constructor(private listService: MainListService) { } 
 
   ngOnInit() {

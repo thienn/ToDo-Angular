@@ -13,6 +13,11 @@ import { ItemNoneComponent } from './todo/item-none/item-none.component';
 import { TodoComponent } from './todo/todo.component';
 import { SharedModule } from './shared/shared.module';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import  { environment }  from '../envtodo';
+import { TodomainComponent } from './todomain/todomain.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,10 +27,13 @@ import { SharedModule } from './shared/shared.module';
     ItemComponent,
     ItemDetailComponent,
     ItemNoneComponent,
-    TodoComponent
+    TodoComponent,
+    TodomainComponent,
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
     SharedModule,
     AppRoutingModule
   ],

@@ -6,12 +6,18 @@
 -->
 
 <!-- To look up the icons to be used in this project - https://fontawesome.com/how-to-use/on-the-web/setup/getting-started?using=web-fonts-with-css -->
-<div class="input-group">
-  <input type="text" class="form-control" #itemName>
-  <div class="input-group-addon hover-cursor" (click)="onAdd(itemName)">
-    <i class="fas fa-plus-circle fa-2x"></i>
-  </div>
-</div>
+<ng-template [ngIf]="!isAuthenticatedCheck()">
+  View-mode. Log in to add items
+</ng-template>
+
+<ng-template [ngIf]="isAuthenticatedCheck()">
+    <div class="input-group">
+        <input type="text" class="form-control" #itemName>
+        <div class="input-group-addon hover-cursor" (click)="onAdd(itemName)">
+          <i class="fas fa-plus-circle fa-2x"></i>
+        </div>
+  </div>  
+</ng-template>
 
 <div style="margin: 5px 0px">
   <ul class="list-group">

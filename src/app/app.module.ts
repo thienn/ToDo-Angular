@@ -17,6 +17,12 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import  { environment }  from '../envtodo';
 import { TodomainComponent } from './todomain/todomain.component';
+import { AuthComponent } from './auth/auth.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './auth/auth.service';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
@@ -29,15 +35,21 @@ import { TodomainComponent } from './todomain/todomain.component';
     ItemNoneComponent,
     TodoComponent,
     TodomainComponent,
+    AuthComponent,
+    SigninComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     SharedModule,
     AppRoutingModule
+
   ],
-  providers: [MainListService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

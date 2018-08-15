@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from './shared/todo.service';
+import { AuthService } from '../auth/auth.service';
+import { AngularFireAuth } from 'angularfire2/auth'; 
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-todomain',
@@ -9,8 +12,9 @@ import { TodoService } from './shared/todo.service';
 })
 export class TodomainComponent implements OnInit {
   todolistArray: any[]; // Change later to only accept a certain model structure, for safety reasons. Between ionic and angular
+  user = 'unknown';
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService, private authService: AuthService) { }
 
   ngOnInit() {
     this.todoService.getTodoList().snapshotChanges().subscribe(
@@ -32,8 +36,9 @@ export class TodomainComponent implements OnInit {
   }
 
   onAdd(itemName) {
+    this.user = firebase.auth().currentUser.email; 
     console.log(itemName.value);
-    this.todoService.addItem(itemName.value); // Access the itemName value (whatever is typed into input field, then add it to the firebase via service)
+    this.todoService.addItem(itemName.value, this.user); // Access the itemName value (whatever is typed into input field, then add it to the firebase via service)
     itemName.value = null; // Reset the input field
   }
 
@@ -44,4 +49,9 @@ export class TodomainComponent implements OnInit {
   onDelete($key: string) {
     this.todoService.removeItem($key);
   }
+
+  isAuthenticatedCheck() {
+    return this.authService.isAuthenticated();
+  }
+
 }

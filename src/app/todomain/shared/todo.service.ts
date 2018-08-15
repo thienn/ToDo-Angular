@@ -14,9 +14,11 @@ export class TodoService {
     return this.todoList;
   }
 
-  addItem(name: string) {
+  addItem(name: string, user: string) {
     this.todoList.push({
       name: name,
+      author: user,
+      description: "", 
       isChecked: false
     });
   }
